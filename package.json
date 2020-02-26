@@ -1,0 +1,23 @@
+{
+  "name": "approval-voting",
+  "version": "0.0.1",
+  "description": "test if distributed approval voting viable.",
+  "main": "apprVote.js",
+  "scripts": {
+    "test": "mocha votes",
+    "apprVote": "./apprVote.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/approval-voting"
+  },
+  "author": "BadQuanta",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "commander": "^4.1.1",
+    "rimraf": "^3.0.2"
+  },
+  "devDependencies": {
+    "mocha": "^7.0.1"
+  }
+}
