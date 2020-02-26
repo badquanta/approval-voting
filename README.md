@@ -3,7 +3,7 @@
 Design goals:
 
 1) Keep source simple & accessable.
-2) Support, or at least options for text-only interfaces, especiall command line; 
+2) Support, or at least options for text-only interfaces, especially command line; 
 as well as all accessiblity options via web, native desktop services (speech to text; speech recogniztion) and mobile device features.
 3) Allow anyone to run their own votes on their own questions for their own reasons; but also just to encourage peer review.
 
@@ -13,9 +13,9 @@ Start by creating a vote:
 
     apprVote.js new "Who should be president?" -c Bernie -c Warren -c Klobuchar -c Biden -c Bloomber -c Styer
 
-What this should do is create a simple `question` .json file. Where `question` is everything between the quotes: `Who should be President` .
+What this should do is create a simple `question` .json file. Where `question` is everything between the quotes: `Who should be President` .  It'll be created in the `approval` directory; in the current working directory.. unless a different directory is specified (see help.)
 
-Each `-c` is a `chocie` flag. It notes a different choice a voter has for this option.
+Each `-c` is a `choice` flag. It notes a different choice a voter has for this option.
 
 This file will be named: `Who should be president?.json` 
 
@@ -38,7 +38,7 @@ It will have the following contents:
 }
 ```
 
-So now you have a question.json.... now what?
+So now you have a approve/question.json.... now what?
 
 Now you can hold a vote; you don't NEED to specify who can vote or anything more... by default Approval voting should be easy to use so that's all that should be needed to start voting.
 
