@@ -16,14 +16,20 @@ as well as all accessiblity options via web, native desktop services (speech to 
 
 Start by creating a vote:
 
-    apprVote.js create "Who should be president?" -c Bernie -c Warren -c Klobuchar -c Biden -c Bloomber -c Styer save
+    apprVote.js create "Who should be president?"\
+      -c Bernie\
+      -c Warren\
+      -c Klobuchar\
+      -c "Biden,Bloomber, Styer "\
+      save
 
 What this should do is create a simple `questionId` .json file. Where `questionId` is is a hash of all the data that went into defining that question.  
+
 It'll be created in the `approvals` directory within the current working directory.. unless a different directory is specified (see `./apprVote.js --basedir | -b`).
 If this directory does not exist; it will be created. If it cannot be written too, and `--force | -f` has been specified, it will be removed & recreated.
 If it is NOT a git repository; it will be initialized as one.
 
-Each `-c` is a `choice` flag. It notes a different choice a voter has for this option. Here we've defined 6 choices.
+Each `-c` is a `choice` flag. It notes a different choice a voter has for this option. Here we've defined 6 choices.  You can keep adding `-c`s, or add one with a quoted and comma-separated list of enteries.
 
 This file will be named: `approvals/{questionId}.json`. Again, the QuestionID is a hash of ALL the properties that went into defining the question.
 
