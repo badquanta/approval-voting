@@ -1,8 +1,13 @@
 # Approval Voting as an Application.
 
+Just started this last night: Feb 26th. 
+Don't know why I didn't start working on this in December of 2000.
+See [Approval Voting]() for basic design specifications.
+
 Design goals:
 
 1) Keep source simple & accessable.
+2) Distributed operation.  People can run votes on the same question independently.  The results can be merged; or simply handled independently.. but a common history is maintained. (implemented with GIT.)
 2) Support, or at least options for text-only interfaces, especially command line; 
 as well as all accessiblity options via web, native desktop services (speech to text; speech recogniztion) and mobile device features.
 3) Allow anyone to run their own votes on their own questions for their own reasons; but also just to encourage peer review.
@@ -11,13 +16,16 @@ as well as all accessiblity options via web, native desktop services (speech to 
 
 Start by creating a vote:
 
-    apprVote.js new "Who should be president?" -c Bernie -c Warren -c Klobuchar -c Biden -c Bloomber -c Styer
+    apprVote.js create "Who should be president?" -c Bernie -c Warren -c Klobuchar -c Biden -c Bloomber -c Styer save
 
-What this should do is create a simple `question` .json file. Where `question` is everything between the quotes: `Who should be President` .  It'll be created in the `approval` directory; in the current working directory.. unless a different directory is specified (see help.)
+What this should do is create a simple `questionId` .json file. Where `questionId` is is a hash of all the data that went into defining that question.  
+It'll be created in the `approvals` directory within the current working directory.. unless a different directory is specified (see `./apprVote.js --basedir | -b`).
+If this directory does not exist; it will be created. If it cannot be written too, and `--force | -f` has been specified, it will be removed & recreated.
+If it is NOT a git repository; it will be initialized as one.
 
-Each `-c` is a `choice` flag. It notes a different choice a voter has for this option.
+Each `-c` is a `choice` flag. It notes a different choice a voter has for this option. Here we've defined 6 choices.
 
-This file will be named: `Who should be president?.json` 
+This file will be named: `approvals/{questionId}.json`. Again, the QuestionID is a hash of ALL the properties that went into defining the question.
 
 It will have the following contents:
 
@@ -38,15 +46,19 @@ It will have the following contents:
 }
 ```
 
-So now you have a approve/question.json.... now what?
+The last part of the command: `save`, specifies that apprVote.js should commit chages to the `approvals` (aka: `basedir`) git repository. __Note__: If the `basedir` repo isn't clean & comitted & fully up-to-date, then polls should refuse to run.  This should make sure `polls` will run after this command finishes.
+
+So now you have a `approvals/{questionId}.json`.... now what?
 
 Now you can hold a vote; you don't NEED to specify who can vote or anything more... by default Approval voting should be easy to use so that's all that should be needed to start voting.
 
-### Start voting
+### Start polling questions.
 
 Now you have that above question; you can tell the application to take votes:
 
-    apprVote.js "./Who should be president?.json" start
+    apprVote.js poll <questionId#1> ["<questionId#2>"...]
+
+One may poll ANY NUMBER OF QUESTIONS. If none are specified; then all questions within `approvals` should be 
 
 Since nothing else was specified; it should just clear the screen and ask this question:
 
@@ -195,3 +207,9 @@ So: As check-ins, ballots and check-outs are collected they are loged in "digest
 Digests are batches of eatch; in debug mode this is 1 each; but otherwise this is usually at least a set of 10 each.  What "batches" do is anonomize data.  It is logged and dummped in "batches."  Each item logged should be usable to verify the integrity of either two. Two verified good items should be able to reconstruct the missing/corrupted third item; and agree which of the three is bad and which of the three is good. All three of each batch log should be referring to the same set of "checkin-ballot-checkout" set; but EXACTLY which goes to which should be generally unknowable. 
 
 Anyone running any copy of this software should be able to verify the data in this batch report and collect totals from all verified batch reports as well as report any data that fails to pass verification. 
+
+## What's happening behind the scenes?
+
+Behind the scenes; the approvals directory is a git repository.
+
+When a poll is taken; that repository is cloned...
