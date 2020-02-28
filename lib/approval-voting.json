@@ -1,0 +1,7 @@
+{  
+  "basedir": "approve",
+  "verbose": false,
+  "test": false,
+  "separator": ",",
+  "algorithim": "md5"
+}
