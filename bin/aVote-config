@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+const AvCli = require('../cli');
+const aVoteConfig = new AvCli.config();
+aVoteConfig.nextTickIfMain(module);

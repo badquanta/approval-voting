@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+const AV = require('../');
+const list = module.exports= new AV.cli.list();
+list.nextTickIfMain(module);

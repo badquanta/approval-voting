@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+const AV = require('..');
+const aVote =module.exports = new AV.lib.cli.Cmd;
+/**  **/
+aVote.action(function(cmd){
+  
+  aVote.outputHelp();
+})
+aVote.command('question','create a question.');
+aVote.command('show');
+aVote.command('poll');
+aVote.command('list', 'list defined questions');
+aVote.nextTickIfMain(module);
+/** finish **/
+// effectively, process.exit(EXIT_OK), but wait on promises too.

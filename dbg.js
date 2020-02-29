@@ -1,5 +1,5 @@
 const Debug = require('debug');
-let name = require('./name');
+let name = require('./lib/name');
 const dbg = module.exports = Debug(name);
 dbg.warn = Debug(`${name}:WARNING`);
 dbg.warn.color = 1;

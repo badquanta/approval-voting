@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+const AvCli = require('../cli');
+const question = module.exports = new AvCli.question();
+question.nextTickIfMain(module);

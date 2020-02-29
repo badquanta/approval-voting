@@ -1,5 +1,5 @@
 {  
-  "basedir": "approve",
+  "workdir": "approve",
   "verbose": false,
   "test": false,
   "separator": ",",
