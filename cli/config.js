@@ -13,6 +13,7 @@ class config extends require('./Cmd') {
     this.command('show').description('print the current config').action(function(path){
       console.log('TODO: config',cfg.json);
     });
+    this.action(this.outputHelp);
   }
 }
 module.exports = config;
