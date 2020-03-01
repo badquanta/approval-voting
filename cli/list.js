@@ -8,7 +8,7 @@ class list extends require('./Cmd') {
     this.action(function(cmd){
       // find everything
       console.log('dirrr',Fs.readdirSync(cfg.workdir,{encoding:'utf8'}));
-
+ 
     })
   }
 }

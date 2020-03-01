@@ -23,13 +23,14 @@ Start by creating a vote:
       -c "Biden,Bloomber, Styer "\
       save
 
-What this should do is create a simple `questionId` .json file. Where `questionId` is is a hash of all the data that went into defining that question.  
+What this should do is create a simple `questionId` .json file. Where `questionId` is is a hash of all the data that went into defining that question.  (todo: the choices should always be stored & saved in clean-alphabetical order; to ensure hashes are the same between questions that have the same text and choices, but the order of choices differ.  `getChoices()` always copies and randomizes the order;
+where as the `choices` property will return the alphabetized order. )
 
 It'll be created in the `approvals` directory within the current working directory.. unless a different directory is specified (see `./apprVote.js --basedir | -b`).
 If this directory does not exist; it will be created. If it cannot be written too, and `--force | -f` has been specified, it will be removed & recreated.
 If it is NOT a git repository; it will be initialized as one.
 
-Each `-c` is a `choice` flag. It notes a different choice a voter has for this option. Here we've defined 6 choices.  You can keep adding `-c`s, or add one with a quoted and comma-separated list of enteries.
+Each `-c` is a `choice` flag. It notes a different choice a voter has for this option. Here we've defined 6 choices.  You can keep adding `-c`s, or add one with a quoted and comma-separated list of entries.
 
 This file will be named: `approvals/{questionId}.json`. Again, the QuestionID is a hash of ALL the properties that went into defining the question.
 
@@ -52,7 +53,7 @@ It will have the following contents:
 }
 ```
 
-The last part of the command: `save`, specifies that apprVote.js should commit chages to the `approvals` (aka: `basedir`) git repository. __Note__: If the `basedir` repo isn't clean & comitted & fully up-to-date, then polls should refuse to run.  This should make sure `polls` will run after this command finishes.
+The last part of the command: `save`, specifies that apprVote.js should commit changes to the `approvals` (aka: `basedir`) git repository. __Note__: If the `basedir` repository isn't clean & committed & fully up-to-date, then polls should refuse to run.  This should make sure `polls` will run after this command finishes.
 
 So now you have a `approvals/{questionId}.json`.... now what?
 
@@ -106,8 +107,8 @@ Upon hitting enter, for the above entered question, you will see:
     Please Enter your choices:
     > ...user input...
 
-What has occured is that a voter has been "checked-in" to the "booth";
-if at this point some other voter as some other terminal tries to identify as the same voter, they'll get notified that this voter has appeared alredy to vote; and options to start possibly challenging false votes.
+What has occurred is that a voter has been "checked-in" to the "booth";
+if at this point some other voter as some other terminal tries to identify as the same voter, they'll get notified that this voter has appeared already to vote; and options to start possibly challenging false votes.
 
 While the program collects the ballot; the "voter" remains "in-the-booth", although this should have an optional maximum timeout to prevent "booth locking." Perhaps 30 minutes.
 
@@ -181,7 +182,7 @@ Again, the screen clears:
 
 The user should be able to clear the entire list.
 They may do this by entering `-` and starting over.
-They may also remove a single entry, inverse of adding a single entry, by entering a `-` before the entry.  Doing so simply repeats the above process until the user entres a blank line.  At which point the system clears the screen and confirms their choices:
+They may also remove a single entry, inverse of adding a single entry, by entering a `-` before the entry.  Doing so simply repeats the above process until the user entries a blank line.  At which point the system clears the screen and confirms their choices:
 
 
     Collecting Ballot Entry for: 
@@ -208,14 +209,36 @@ Upon entering anything other than the letters 'y','n','yes','no' or some case co
 
 So upon indicating YES/Y/yes/y, the ballot is created within the vote directory; and the user is marked as checked out WITH a valid ballot.
 
-So: As check-ins, ballots and check-outs are collected they are loged in "digests."
+So: As check-ins, ballots and check-outs are collected they are logged in "digests."
 
-Digests are batches of eatch; in debug mode this is 1 each; but otherwise this is usually at least a set of 10 each.  What "batches" do is anonomize data.  It is logged and dummped in "batches."  Each item logged should be usable to verify the integrity of either two. Two verified good items should be able to reconstruct the missing/corrupted third item; and agree which of the three is bad and which of the three is good. All three of each batch log should be referring to the same set of "checkin-ballot-checkout" set; but EXACTLY which goes to which should be generally unknowable. 
+Digests are batches of each; in debug mode this is 1 each; but otherwise this is usually at least a set of 10 each.  What "batches" do is anonymize data.  It is logged and dumped in "batches."  Each item logged should be usable to verify the integrity of either two. Two verified good items should be able to reconstruct the missing/corrupted third item; and agree which of the three is bad and which of the three is good. All three of each batch log should be referring to the same set of "check-in, ballot ,check-out" set; but EXACTLY which goes to which should be generally unknowable. 
 
 Anyone running any copy of this software should be able to verify the data in this batch report and collect totals from all verified batch reports as well as report any data that fails to pass verification. 
 
 ## What's happening behind the scenes?
 
 Behind the scenes; the approvals directory is a git repository.
+(the following is not yet implemented, consider it a road map:)
 
-When a poll is taken; that repository is cloned...
+
+1) When a poll is taken; that repository's "master" branch is cloned into a polling temporary directory.
+2) Create new branch from the questions that includes the username, host name, etc of the "pollster" (a.k.a. the person running the approval voting software)
+3) While the software is actively collecting ballots through it's inputs (various inputs include stdin, local & network sockets, express-server, gui, etc.) the ballots are buffered in memory and written to files in "batches."  The software is maintaining three independent bits of information surrounding each ballot collected: 
+  1) Voter check ins: this identifies who has presented themselves to fill in a ballot, but does not in any way specify which one is theirs.  A voter that is already checked-in, or one that has been checked-out as having cast a ballot already, cannot check-in again.
+  2) Individual ballots.  There can never more ballots generated than the number of individuals checked in.  Ballots can only be validly generated while there is at least one individual still checked in whom has not yet checked-out.
+  3) Voter check outs: this again identifies who is checking-out, and registers weather or not they filled in & casted a ballot or left without casting a ballot.  This allows individuals who have a sudden need to cancel and return later to do so; assuming they do so while polling is still open.
+4) In predefined "batches" these are written to unique and individual files, then added to the history of said cloned master repository.  The software uses the content of each ballot, voterId,etc.etc. to generate one-way hash signatures.  If one knows the values that are represented by this hash, one can re-compute and verify ballots were registered and exist within the repository.  This allows end-users to re-compute and compare ballots in publicly viewable repositories as belonging to them, yet still maintaining a "secrecy" of the ballot.  The goal is that in order to understand the signature on each ballot, you must already have all the information about whom voted on the ballot.
+  1) If the software is interrupted, shutdown, or otherwise has to exit immediately than ballots/check-ins/check-outs that are COMPLETE may be written prior to exit; yet any incomplete ballot/check-in without a corresponding check-out will be discarded. 
+
+The repository of collected ballots is only valid if the following conditions are valid:
+  1) The number of ballots should exactly equal the number of "check-outs having cast a ballot".
+  2) The number of "check-ins" should exactly equal the number of "check-outs without casting a ballot" + "check-outs having cast a ballot."
+  3) The time-stamps of all ballots should correspond to periods of times AFTER check-ins & BEFORE check-outs; and all sums should be proper at all times. (i.e. no ballot will be written at a time there is not at least one check-in without a check-out; no check-out w/ a ballot will be written at a time where there is not at least one unaccounted for check-in & ballot.  No check-out w/o a ballot will be written at a time where there is not at least one unaccounted for check-in (also if there is only one unaccounted for check-in AND a unaccounted for ballot ALSO exists; then this check-out should not be allowed to be created/valid, in order for one person to check out w/o a cast ballot when a ballot was just cast, there must be another person currently checked-in who has yet to check-out.) )
+  4) The repository of check-ins without check-outs is never greater than the number of ballots cast and every individual time-stamp
+  of both commits and of the files themselves should be in absolute agreement.
+
+All of this can be automatically verified by anyone with a copy of a repository that has results.  They should be able to verify all timestamps; uniqueness of all voters on all ballots; identify who voted & when but never whom that person voted for; identify from a larger list of eligible voters whom did not vote.
+
+Any individual; with knowledge of whom they cast the ballot for should be also able to VERIFY the ballot exists on the record, at the right time, with the right signature, etc etc.  All they need is a copy of the repository and a copy of this software.
+
+(All of the above is pie in the sky)
