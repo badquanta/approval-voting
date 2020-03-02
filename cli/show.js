@@ -1,3 +1,5 @@
+/** @module approval-voting/cli */
+
 const Question = require('../lib/Question')
 const dbg = require('../dbg');
 require('./Cmd')

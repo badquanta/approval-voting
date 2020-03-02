@@ -1,9 +1,23 @@
 
-const approval_voting = module.exports = {
+/**
+ * @module approval-voting
+ */
+/**
+ * 
+ */
+module.exports = {
+  /**
+   * @returns {lib}
+   */
   get lib(){return require('./lib')}, 
+  /**
+   * @returns {cli}
+   */
   get cli(){return require('./cli')},
-  bin(mod){    
-
+  /** 
+   * @returns {bin}
+  */
+  get bin(){    
     return require('./bin')
   }
 };

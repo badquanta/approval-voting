@@ -1,17 +1,65 @@
 {
   "name": "approval-voting",
   "version": "0.0.1",
-  "description": "test if distributed approval voting viable.",
-  "main": "apprVote.js",
+  "description": "Make approval voting easy to access, easy to peer review, and easy to extend.",
+  "keywords": [
+    "uses-git",
+    "revision-controlled",
+    "approval-voting",
+    "approval",
+    "vote",
+    "distributed",
+    "democratized",
+    "peer-reviewed",
+    "verifiable",
+    "secret-ballot",
+    "voter-uniqueness"
+  ],
+  "homepage": "https://github.com/BadQuanta/approval-voting/",
+  "bugs": {
+    "url": "https://github.com/badquanta/approval-voting/issues"
+  },
+  "contributors":[
+    {"name": "Jon David Sawyer",
+      "email":"BadQuanta@ufp.institute",
+      "url":"https://badquanta.github.io/"
+    }
+  ],
+  "files":[
+    "package.json",
+    "README.md",
+    "LICENSE",
+    "lib*",
+    "cli*",
+    "bin*",
+    "test*",
+    "cfg*",
+    "index.js",
+    "dbg.js"
+  ],
+  "main": "index.js",
+  "bin":{
+    "aVote": "bin/aVote",
+    "aVote-config": "bin/aVote-config",
+    "aVote-poll":"bin/aVote-poll",
+    "aVote-question":"bin/aVote-question",
+    "aVote-list":"bin/aVote-list"
+  },
   "scripts": {
+    "docs": "jsdoc -c jsdoc.js",
     "test": "mocha",
-    "apprVote": "./apprVote.js"
+    "aVote": "./bin/aVote",
+    "aVote-list": "./bin/aVote-list",
+    "aVote-show": "./bin/aVote-show",
+    "aVote-question": "./bin/aVote-question",
+    "aVote-poll": "./bin/aVote-poll",
+    "aVote-tally": "./bin/aVote-tally"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/approval-voting"
   },
-  "author": "BadQuanta",
+  
   "license": "GPL-3.0",
   "dependencies": {
     "commander": "^4.1.1",
@@ -20,6 +68,7 @@
     "rimraf": "^3.0.2"
   },
   "devDependencies": {
+    "jsdoc": "^3.6.3",
     "mocha": "^7.0.1"
   }
 }

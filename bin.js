@@ -1,11 +1,11 @@
 
 /**
  * Approval voting commands:
+ * @module approval-voting/bin
  */
-class bin extends require('./lib') {
-  static get cmd(){return require('./bin/aVote')}
-  static get question(){return require('./bin/aVote-question')}
-  static get show(){return require('./bin/aVote-show')}
-  static get poll(){return require('./bin/aVote-poll')}
+module.exports = {
+  get cmd(){return require('./bin/aVote')},
+  get question(){return require('./bin/aVote-question')},
+  get show(){return require('./bin/aVote-show')},
+  get poll(){return require('./bin/aVote-poll')}
 }
-module.exports = bin;

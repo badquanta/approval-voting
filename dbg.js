@@ -1,5 +1,10 @@
 const Debug = require('debug');
 let name = require('./lib/name');
+/**
+ * Using the `debug` module, this defines
+ * the root of approval-voting logging.
+ * @todo may move away from debug
+ */
 const dbg = module.exports = Debug(name);
 dbg.warn = Debug(`${name}:WARNING`);
 dbg.warn.color = 1;

@@ -1,8 +1,12 @@
+/** @module approval-voting/cli */
+/** */
 const Question = require('../lib/Question');
+/** */
 const dbg = require('../dbg');
+/** */
 const cfg = require('../cfg');
 /** `apprVote.js` CLI -- COMMAND "new" */
-class CmdQuestion extends require('./Cmd') {
+class question extends require('./Cmd') {
   constructor(...args) {
     super(...args);    
     this.arguments('<text>');
@@ -12,7 +16,7 @@ class CmdQuestion extends require('./Cmd') {
     /**
      * @param flags
      * @param description
-     * @param {default_value or function}... 
+     * @param {function}... 
      ***/
     this.option('-w, --winners <number>',
       `usually 1, or most common choice of all. Can be more than one.`,
@@ -65,4 +69,4 @@ class CmdQuestion extends require('./Cmd') {
     )
   }
 }  
-module.exports = CmdQuestion;
+module.exports = question;

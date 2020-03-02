@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+const cli = require('../cli');
+const poll = module.exports = new cli.poll();
+poll.nextTickIfMain(module);

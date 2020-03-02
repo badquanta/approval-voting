@@ -1,3 +1,4 @@
+/** @module approval-voting/cli */
 const cfg = require('../cfg');
 const dbg = require('../dbg');
 const Fs = require('fs');

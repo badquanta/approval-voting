@@ -1,8 +1,18 @@
+/** @module approval-voting/cli */
+
 const cmd = require('commander');
 const cfg = require('../cfg');
 const Debug = require('debug');
 const dbg = require('../dbg');
-class Cli extends cmd.Command {
+/**
+ * Abstract base command for all the various commands.
+ */
+class Cmd extends cmd.Command {
+  /**
+   * When mod equals process.mainModule; this will run the parse
+   * function for `this` on `process.nextTick`
+   * @param {Module} mod the module to test against process.mainModule
+   */
   nextTickIfMain(mod) {
     if (process.mainModule == mod) {
       process.nextTick(() => {
@@ -24,6 +34,14 @@ class Cli extends cmd.Command {
       });
     }
   }
+  /**
+   * This base class will define basic options like:
+   * - `-w, --workdir <path>`
+   * - `-v, --verbosity [number]`
+   * - `--verbose`
+   * - `-q, quiet`
+   * @param  {...any} args these will get passe don to `Commander.js`.Command's constructor.
+   */
   constructor(...args) {
     super(...args);
     /** Where to store data. */
@@ -64,4 +82,4 @@ class Cli extends cmd.Command {
     )//-q/--quiet
   }
 }
-module.exports = Cli;
+module.exports = Cmd;
