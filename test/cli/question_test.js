@@ -1,19 +1,21 @@
-const cli = require('../../bin/apprVote');
+const question = require('../../cli/question');
+var cli = undefined;
 const Assert = require('assert');
 const Question = require('../../lib/Question');
 describe('question <text>',function(){
   var args;
   beforeEach(function(){
     args = ['',''];
+    cli = new question;
     Question.resetLoaded();
   });
   it('works with two choices:',function(){
-    args.push('question','just two choices','-c','c1','-c','c2');
+    args.push('just two choices','-c','c1','-c','c2');
     cli.parse(args);
     Assert.equal(Question.loaded.length,1);
   });
   it('fails with just one choice:',function(){
-    args.push('question','just one','-c','c1');
+    args.push('just one','-c','c1');
     Assert.throws(()=>{
       cli.parse(args);
     });

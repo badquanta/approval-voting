@@ -27,7 +27,7 @@ class Cli extends cmd.Command {
   constructor(...args) {
     super(...args);
     /** Where to store data. */
-    this.option('-b, --basedir <path>', 'Specify the directory all files are created within.', (path) => cfg.basedir = path, 'approvals')
+    this.option('-b, --basedir <path>', 'Specify the directory all files are created within.', (path) => cfg.workdir = path, 'approvals')
     /** How much to report to the user. */
     this.option('-v, --verbosity [verbosity]', 'Specify `debug` pattern of output',
       // When specified on the command line, this function will be triggered.

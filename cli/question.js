@@ -1,11 +1,11 @@
 const Question = require('../lib/Question');
 const dbg = require('../dbg');
-const cfg = require('../lib/approval-voting.json');
+const cfg = require('../cfg');
 /** `apprVote.js` CLI -- COMMAND "new" */
 class CmdQuestion extends require('./Cmd') {
   constructor(...args) {
-    super(...args);
-    this.command('question <question_text_json>')
+    super(...args);    
+    this.arguments('<text>');
     this.description(
       `create a new question`
     )
