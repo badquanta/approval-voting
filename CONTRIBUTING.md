@@ -58,6 +58,17 @@ knowing no other components will be `require()`ed UNTIL one starts calling code 
 3) _Only Parse What You Need to Run_: So an added benefit of this is that only things that are referenced by executing code will actually be `require()`ed.  What this means is that time will wasted less on parsing code that will never be called.  A great example of this is the following: Each shell command script has a corresponding Class implementation.  One for `question`,`list`,`show`... etc.  However, when actually executing the `question` shell script; there is absolutely no need to also parse the class definitions of `list`,`show`... etc.  And because everything is `require()`ed-on-demand; since this will never be demanded by the `aVote-question` shell script; that time will not be wasted in parsing the other class definitions.
 
 
+## Object Oriented vs. Functional
+
+Ultimately we are speaking about syntactic sugar.  
+I agree with many claims of strengths about functional programming.
+I agree with some claims of strengths and many claims of critiques of object oriented programming.
+I also agree; that in the end; the processor doesn't care: this is largely about how we think about problems, and thankfully we are capable of thinking about them from more than one perspective.
+
+So I admit to having taken, surprisingly to myself, a more-object oriented approach to some problem domains.  Some of this might be a temporary artifact; to be worked into a more functional paradigm; but some of it feels the "most right" so far and might persist.  The object oriented nature of the Cli helps isolate each command from other commands; while also sharing common traits.
+
+However what I'm trying to state here is that there is NOT a defined convention between preferring `Object-Oriented` programming vs `Function-Oriented` programming.  I'm pretty sure I could rewrite everything to take a data parameter instead of `this` and maybe we'd even see a performance boost.  What's in the code is reflective of my early years learning `object-oriented` problem solving prior to having learned `function-oriented` problem solving.
+
 ## Thank you.
 
 Thanks from Jon David Sawyer, for taking the time to check this idea out, and considering contributing to it's success.
