@@ -23,8 +23,8 @@ The Wiki, the Issues are completely open for anyone to contribute too.
 For now; this is ALSO true of the master repository; I encourage anyone to submit pull requests directly to it for evaluation.
 
 In the future we will have designated "master"(latest release, locked), "latest-rc"(next like release version, locked) branches.. as noted these two will be locked to ensure
-errant code is never pushed to them by mistake.  A "master-security-fixes" branch will exist; along with a "master-fixes" branch that will offer the latest "fixes" with the "security-fixes" branch havign a shorter turn-arround for approving updates to it than the "fixes" branch.
-Allong with all these locked; and semi-locked branches the goal is to have different "development" branches; center around topics of active development (new feature, depreciation of old features, refactoring/module work, documentation/admin work.)
+errant code is never pushed to them by mistake.  A "master-security-fixes" branch will exist; along with a "master-fixes" branch that will offer the latest "fixes" with the "security-fixes" branch having a shorter turn-around for approving updates to it than the "fixes" branch.
+Along with all these locked; and semi-locked branches the goal is to have different "development" branches; center around topics of active development (new feature, depreciation of old features, refactoring/module work, documentation/admin work.)
 
 ## Conventions 
 
@@ -32,9 +32,30 @@ As of yet; no "conventions" for code, documentation, or other content has been d
 Keeping in mind the goal of this is to garner as many "peer-reviewers" as possible; care should be taken to follow "conventions" of the open-source community at large.
 Care should be given to present this software in a way that is "native" to each "peer-reviewers" platform (as much as possible.)
 Mobile device users and "peer" developers should be able to think of this software applications in terms that make sense (Services, Screens/Pages, Widgets/Buttons; Text/Input)
-and similarly unix hackers should also be able to think of this software application in therms that make sense (stdin, stdout, stderr, sockets, ports, files, folders).
+and similarly Unix hackers should also be able to think of this software application in therms that make sense (stdin, stdout, stderr, sockets, ports, files, folders).
 
-To that end, generally this project should be hesitant to define conventions, defining them only when nessicary for collaboration purposes, and generally attempting to follow or otherwise be compatible with "larger" conventions in the open software field.
+To that end, generally this project should be hesitant to define conventions, defining them only when necessary for collaboration purposes, and generally attempting to follow or otherwise be compatible with "larger" conventions in the open software field.
+
+
+#### index.js files...
+
+I suppose I've broken my own rule already about not defining conventions.. here is a "convention" I'm following with "index.js"
+files:
+
+1) They require-on-demand.
+2) They act as "public" API interfaces.
+3) They are to be POJO.
+4) They are NOT to `require()` any other modules within this repository.
+5) They may `require()` external modules outside of this repository.
+
+Now why do I have this convention?  I find it helps in the following areas:
+
+1) _Fast-loading_: because the index does not require the rest of the library when it is required, it loads faster.
+2) _No circular requires_: Within this repository it is both possible (and natural) for some components to have circular dependencies.
+By ensuring "index.js" files do not require when they are loaded; each component can safely require these "library indexes" and
+then use them to require-on-demand other components of the library they also make use of.  Each component can be `require()`ed safely
+knowing no other components will be `require()`ed UNTIL one starts calling code of that first component loaded (mostly.)
+3) _Only Parse What You Need to Run_: So an added benefit of this is that only things that are referenced by executing code will actually be `require()`ed.  What this means is that time will wasted less on parsing code that will never be called.  A great example of this is the following: Each shell command script has a corresponding Class implementation.  One for `question`,`list`,`show`... etc.  However, when actually executing the `question` shell script; there is absolutely no need to also parse the class definitions of `list`,`show`... etc.  And because everything is `require()`ed-on-demand; since this will never be demanded by the `aVote-question` shell script; that time will not be wasted in parsing the other class definitions.
 
 
 ## Thank you.

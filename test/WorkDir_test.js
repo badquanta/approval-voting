@@ -30,10 +30,13 @@ describe("lib.WorkDir",function(){
       })
       .then(()=>wd.ensureRemoved())
       .then(()=>{
+        // we wait for a timeout to ensure the filesystem has had a chance to sync the change.
+        // calling a check exists immediately after calling for it's removal will always return true 
+        // (apparently)
         return new Promise((resolve,reject)=>{
-          return process.nextTick(()=>{
+          return setTimeout(()=>{
             return resolve();
-          });        
+          },200);        
         });
       })
       .then(()=>wd.checkExists())
