@@ -26,14 +26,17 @@
     }
   ],
   "files":[
+    "bin*",
+    "cfg*",
+    "cli*",
     "package.json",
     "README.md",
     "LICENSE",
     "lib*",
-    "cli*",
-    "bin*",
+    
+    
     "test*",
-    "cfg*",
+    
     "index.js",
     "dbg.js"
   ],
@@ -43,12 +46,14 @@
     "aVote-config": "bin/aVote-config",
     "aVote-poll":"bin/aVote-poll",
     "aVote-question":"bin/aVote-question",
-    "aVote-list":"bin/aVote-list"
+    "aVote-list":"bin/aVote-list",
+    "aVote-show":"bin/aVote-show"
   },
   "scripts": {
     "docs": "jsdoc -c jsdoc.js",
     "test": "mocha",
     "aVote": "./bin/aVote",
+    "aVote-config": "./bin/avote-config",
     "aVote-list": "./bin/aVote-list",
     "aVote-show": "./bin/aVote-show",
     "aVote-question": "./bin/aVote-question",

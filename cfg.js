@@ -2,6 +2,7 @@ const data = {
 }
 const dbg = require('./dbg');
 const MIN_VERBOSITY_VERBOSE = 2;
+const {lib} = require('./');
 /**
  * Represents runtime-configuration. 
  * Is writable; will clean & validate values.
@@ -15,11 +16,11 @@ const MIN_VERBOSITY_VERBOSE = 2;
  */
 class Cfg {
   /** Minimum verbosity level considered to be "verbose." */
-  static MIN_VERBOSITY_VERBOSE = 2;
+  get MIN_VERBOSITY_VERBOSE(){return MIN_VERBOSITY_VERBOSE}
   /** The working directory of this repository: the default in version 0.0.0 is the current working directory's "approvals" folder.
   */
   get workdir() {
-    return data.workdir;
+    return new lib.WorkDir(data.workdir);
   }
   /** Through environment variables, command line flags, or other means one may choose another path to work with; and polling always
    * works with a different directory cloned from this original value.

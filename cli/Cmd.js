@@ -1,13 +1,17 @@
 /** @module approval-voting/cli */
-
-const cmd = require('commander');
-const cfg = require('../cfg');
+// internal deps
+const ApprovalVoting = require('../');
+const {cfg, dbg, lib} = ApprovalVoting;
+const {WorkDir} = lib;
+// external deps
+const Commander = require('commander');
 const Debug = require('debug');
-const dbg = require('../dbg');
 /**
  * Abstract base command for all the various commands.
+ * @extends commander/Command
+ * 
  */
-class Cmd extends cmd.Command {
+class Cmd extends Commander.Command {
   /**
    * When mod equals process.mainModule; this will run the parse
    * function for `this` on `process.nextTick`
@@ -34,6 +38,7 @@ class Cmd extends cmd.Command {
       });
     }
   }
+ 
   /**
    * This base class will define basic options like:
    * - `-w, --workdir <path>`
@@ -79,7 +84,7 @@ class Cmd extends cmd.Command {
         dbg('--quiet')
         Debug.enable("");
       }
-    )//-q/--quiet
+    )//-q/--quiet    
   }
 }
 module.exports = Cmd;

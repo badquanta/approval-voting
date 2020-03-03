@@ -19,5 +19,7 @@ module.exports = {
   */
   get bin(){    
     return require('./bin')
-  }
+  },
+  get cfg(){return require('./cfg') },
+  get dbg(){return require('./dbg')}
 };
