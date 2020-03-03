@@ -18,8 +18,11 @@ class Cmd extends Commander.Command {
    * @param {Module} mod the module to test against process.mainModule
    */
   nextTickIfMain(mod) {
+    dbg("nextTickIfMain")
     if (process.mainModule == mod) {
+      dbg("nextTickIfMain process.mainModule is module.")
       process.nextTick(() => {
+        dbg("nextTickIfMain->nextTick")
         process.setUncaughtExceptionCaptureCallback((err) => {
           console.error(err);
           process.exit(err);
@@ -34,7 +37,7 @@ class Cmd extends Commander.Command {
         });
         this.parseAsync(process.argv);
         /** run actions **/
-        console.debug();
+        //console.debug(this);
       });
     }
   }

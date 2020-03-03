@@ -37,10 +37,12 @@ and similarly Unix hackers should also be able to think of this software applica
 To that end, generally this project should be hesitant to define conventions, defining them only when necessary for collaboration purposes, and generally attempting to follow or otherwise be compatible with "larger" conventions in the open software field.
 
 
-#### index.js files...
+#### <foldername>/index.js && <foldername>.js files...
 
 I suppose I've broken my own rule already about not defining conventions.. here is a "convention" I'm following with "index.js"
-files:
+files.  This applies to files named `index.js` within any `foldername`; but also to files that share the same name as a folder: `foldername.js`.  When `npm`'s `require()` is loading, the `foldername.js` would be loaded instead of a `foldername/index.js` if `require('./foldername')` was given.  However, from within the directory, if `require('./')` is given this will instead load that local `index.js` first.
+
+Why do I mention this?  Because with this it is possible to provide a "public" API, which is what `foldername.js` gives to anyone outside that folder, and an "semi-protected" API (semi-protected, because anyone else could reach in and directly require that file if they wanted, but it wouldn't be given to them when they ask for that `foldername`) which is what `foldername/index.js` would provide.
 
 1) They require-on-demand.
 2) They act as "public" API interfaces.
@@ -53,7 +55,7 @@ Now why do I have this convention?  I find it helps in the following areas:
 1) _Fast-loading_: because the index does not require the rest of the library when it is required, it loads faster.
 2) _No circular requires_: Within this repository it is both possible (and natural) for some components to have circular dependencies.
 By ensuring "index.js" files do not require when they are loaded; each component can safely require these "library indexes" and
-then use them to require-on-demand other components of the library they also make use of.  Each component can be `require()`ed safely
+`then use them to require-on-demand other components of the library they also make use of.  Each component can be `require()`ed safely
 knowing no other components will be `require()`ed UNTIL one starts calling code of that first component loaded (mostly.)
 3) _Only Parse What You Need to Run_: So an added benefit of this is that only things that are referenced by executing code will actually be `require()`ed.  What this means is that time will wasted less on parsing code that will never be called.  A great example of this is the following: Each shell command script has a corresponding Class implementation.  One for `question`,`list`,`show`... etc.  However, when actually executing the `question` shell script; there is absolutely no need to also parse the class definitions of `list`,`show`... etc.  And because everything is `require()`ed-on-demand; since this will never be demanded by the `aVote-question` shell script; that time will not be wasted in parsing the other class definitions.
 

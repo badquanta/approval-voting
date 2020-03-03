@@ -8,9 +8,10 @@ const { Cmd } = cli;
  */
 class show extends Cmd {
   constructor(...args) {
-    super(...args);
-    dbg.verbose('cli/show.js');
-    this.command('show')
+    super(...args);    
+    dbg('cli/show.js');
+    this.arguments('');
+    //this.command('show')
     this.option('-i, --id <IDs...>',
       `you may specify one or more "ids" to display. If none; defaults to all loaded.`,
       function collectIds(value, previous) {
