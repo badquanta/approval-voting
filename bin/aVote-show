@@ -1,1 +1,4 @@
 #!/usr/bin/env node
+const ApprovalVoting = require('../');
+const aVoteShow = module.exports = new ApprovalVoting.cli.show();
+aVoteShow.nextTickIfMain(module);

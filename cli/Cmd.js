@@ -32,7 +32,7 @@ class Cmd extends Commander.Command {
           console.error(reason);
           process.exit(reason);
         });
-        this.parse(process.argv);
+        this.parseAsync(process.argv);
         /** run actions **/
         console.debug();
       });

@@ -23,14 +23,15 @@ as I problem solve the space between my ideal solution and the implementation I 
 
 Here's what I've got working:
 
-  [X] aVote-question
-  [X] aVote-list
-  [~] aVote-show (in progress)
+ - [X] aVote-question
+ - [X] aVote-list
+ - [x] aVote-config
+ - [ ] aVote-show (in progress)
 
 Here's what I need to finish (at least) for the prototype:
 
-  [ ] aVote-poll
-  [ ] aVote-tally
+ - [ ] aVote-poll
+ - [ ] aVote-tally
 
 Verification should be done at each step of the process.
 It is "o.k" if I skip some verification steps for the `0.0.1`

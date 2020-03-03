@@ -2,7 +2,7 @@
 
 This is where the INTERFACE for commands are defined; see the [./bin](../bin) directory for the commands themselves which largely just instantiate the classes defined within this directory.
 
-## [Cmd](./Cmd.js)
+##### [Cmd](./Cmd.js)
 
 This is the "Abstract Base" command.  It inherits from `Commander.js`'s 'Command' class.  It defines options that all approval voting commands share in common.  It is not intended to be directly instantiated; but rather a class extending this class should do so.
 
@@ -15,7 +15,7 @@ This is to inspect current approval-voting software configuration.  The configur
 This command allows the user to define questions which will be written to the `workdir`.
 
 ## [poll](./poll.js)
-#### todo...
+
 
 This command allows the user to begin the polling of questions.  The user may optional specify an ordered sub-set of questions existing within the `workdir` to poll; but defaults to polling all of them in the order they were originally defined.  This command will clone and branch the `workdir` repository to a temporary `workdir`.  It will commit changes to this `workdir` in batches; and optionally can be configured to push it's `workdir` to the originating `workdir` periodically; or with each batch.  There are rules that specify when the repository is valid; and invalid states should NEVER be pushed to the origin.  The origin has final say which results are pulled into master.
 

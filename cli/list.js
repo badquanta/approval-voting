@@ -14,10 +14,10 @@ class list extends require('./Cmd') {
       return pv.concat(...nv.split([',', ' ', '"', '\'']).map((e) => new RegExp(e.trim())));
     }, []);
     this.action(async function (cmd) {
-      let workdir = new WorkDir(cfg.workdir);
+      
       // find everything
-      return workdir.list().then((ls) => {
-        return ls.map((e) => cfg.workdir + '/' + e).reduce(function (m, e) {
+      return cfg.workdir.list().then((listing) => {
+        return listing.map((e) => cfg.workdir.path + '/' + e).reduce(function (m, e) {
           var data = Question.load(e);
           m[e] = {};
           Object.keys(data.data).forEach((field) => {

@@ -28,7 +28,9 @@ class Cfg {
   set workdir(path){
     return data.workdir=path;
   }
-  /** @todo upstream should point to the pull and push destination for "batch-syncs"; not yet implemented */
+  /** @todo Issue#8 @link https://github.com/badquanta/approval-voting/issues/8
+   * upstream should point to the pull and push destination for "batch-syncs"; not yet implemented 
+   **/
   get upstream() {
     return data.upstream;
   }
