@@ -1,4 +1,4 @@
-/** @module approval-voting/cli */
+/** @module approval-voting/cli/Cmd */
 // internal deps
 const ApprovalVoting = require('../');
 const {cfg, dbg, lib} = ApprovalVoting;

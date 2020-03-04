@@ -19,13 +19,14 @@
   "bugs": {
     "url": "https://github.com/badquanta/approval-voting/issues"
   },
-  "contributors":[
-    {"name": "Jon David Sawyer",
-      "email":"BadQuanta@ufp.institute",
-      "url":"https://badquanta.github.io/"
+  "contributors": [
+    {
+      "name": "Jon David Sawyer",
+      "email": "BadQuanta@ufp.institute",
+      "url": "https://badquanta.github.io/"
     }
   ],
-  "files":[
+  "files": [
     "bin*",
     "cfg*",
     "cli*",
@@ -33,21 +34,18 @@
     "README.md",
     "LICENSE",
     "lib*",
-    
-    
     "test*",
-    
     "index.js",
     "dbg.js"
   ],
   "main": "index.js",
-  "bin":{
+  "bin": {
     "aVote": "bin/aVote",
     "aVote-config": "bin/aVote-config",
-    "aVote-poll":"bin/aVote-poll",
-    "aVote-question":"bin/aVote-question",
-    "aVote-list":"bin/aVote-list",
-    "aVote-show":"bin/aVote-show"
+    "aVote-poll": "bin/aVote-poll",
+    "aVote-question": "bin/aVote-question",
+    "aVote-list": "bin/aVote-list",
+    "aVote-show": "bin/aVote-show"
   },
   "scripts": {
     "docs": "jsdoc -c jsdoc.js",
@@ -64,16 +62,15 @@
     "type": "git",
     "url": "https://github.com/approval-voting"
   },
-  
   "license": "GPL-3.0",
   "dependencies": {
     "commander": "^4.1.1",
     "debug": "^4.1.1",
+    "mkdirp": "^1.0.3",
     "object-hash": "^2.0.3",
     "rimraf": "^3.0.2"
   },
-  "devDependencies": {
-    "jsdoc": "^3.6.3",
+  "devDependencies": {    
     "mocha": "^7.0.1"
   }
 }
