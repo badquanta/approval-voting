@@ -2,7 +2,7 @@
 name: topic of concern
 about: Create a issue about a topic that concerns you regarding this software
 title: ''
-labels: ''
+labels: 'concern'
 assignees: ''
 
 ---
