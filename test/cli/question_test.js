@@ -1,6 +1,6 @@
 const question = require('../../cli/question');
 var cli = undefined;
-const Assert = require('assert');
+const index = require('./'); const {Assert} = index.ext;
 const Question = require('../../lib/Question');
 describe('question <text>',function(){
   var args;

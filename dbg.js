@@ -1,4 +1,5 @@
-const Debug = require('debug');
+const index = require('./');
+ const {Debug } = index.ext;
 let name = require('./lib/name');
 /**
  * Using the `debug` module, this defines

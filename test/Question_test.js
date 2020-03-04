@@ -1,4 +1,4 @@
-const Assert = require('assert');
+const index = require('./'); const {Assert} = index.ext;
 const {lib,cli,bin} = require('../');
 describe("lib.Question",function(){
   it("can be instantiated.",function(){

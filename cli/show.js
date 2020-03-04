@@ -1,14 +1,14 @@
 
 // internal deps:
 const { lib, cli, dbg } = require('../');
-const { Question } = lib;
+const { Question, WorkDir } = lib;
 const { Cmd } = cli;
 /**
  * Command Line Interface sub-command: "show"
  */
 class show extends Cmd {
   constructor(...args) {
-    super(...args);    
+    super(...args);
     dbg('cli/show.js');
     this.arguments('');
     //this.command('show')
@@ -26,35 +26,34 @@ class show extends Cmd {
     this.action(this.showIDs.bind(this));
   }
 
-  showIDs(options) {
-    dbg('hello');
-    var IDs = options.id || Question.loadedIDs;
-    var questions = [];
-    if (IDs.length > 0) {
-      dbg("Got %d IDs", IDs.length);
-      return;
-    } else {
-      dbg("%d IDs loaded", Question.loaded.length);
-      questions = Question.loaded;
-    }
-
-    questions.forEach(function showQuestion(q, qi) {
-      console.log([
-        [`# QUESTION:`, `${qi + 1}`, `OF`, `${questions.length}.`],
-        [],
-        [`## TEXT:`],
-        ['', `"${q.text}"`],
-        [],
-        [`## DESCRIPTION:`],
-        ['', `${q.description ? q.description : "<UNDEFINED>"}`],
-        [],
-        [`## CHOICES:`],
-        ...q.choices.map((c, i) =>
-          [`### ${i} )`, '', `${c}`]
-        )
-      ].map((r) => r.join('\t')).join('\n'));
+  async showIDs(options) {
+    return new Promise((resolve, reject) => {
+      WorkDir.listQuestions()
+        .then((list) => Question.loadAll(...list))
+        .then((questions) => {
+          questions.map(function showQuestion(q, qi) {
+            return output = [
+              [`# QUESTION:`, `${qi + 1}`, `OF`, `${questions.length}.`],
+              [],
+              [`## TEXT:`],
+              ['', `"${q.text}"`],
+              [],
+              [`## DESCRIPTION:`],
+              ['', `${q.description ? q.description : "<UNDEFINED>"}`],
+              [],
+              [`## CHOICES:`],
+              ...q.choices.map((c, i) =>
+                [`### ${i} )`, '', `${c}`]
+              )
+            ].map((r) => r.join('\t')).join('\n');
+          });
+          var output = questions.join('\n---\n');
+          console.log(output);
+          return Promise.resolve(output);
+        });
     });
   }
+
 }
 /** @module approval-voting/cli */
 module.exports = show;

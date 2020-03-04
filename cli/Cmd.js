@@ -1,14 +1,16 @@
 /** @module approval-voting/cli/Cmd */
 // internal deps
-const ApprovalVoting = require('../');
-const {cfg, dbg, lib} = ApprovalVoting;
-const {WorkDir} = lib;
+const index = require('../');
+const {cfg, dbg, lib} = index;
+//const {WorkDir} = lib;
 // external deps
-const Commander = require('commander');
-const Debug = require('debug');
+const index = require('./'); const {Commander} = index.ext;
+const index = require('./');
+ const {Debug } = index.ext;
 /**
  * Abstract base command for all the various commands.
  * @extends commander/Command
+ * @exports Cmd
  * 
  */
 class Cmd extends Commander.Command {
@@ -90,4 +92,5 @@ class Cmd extends Commander.Command {
     )//-q/--quiet    
   }
 }
+/** @exports @class Cmdm */
 module.exports = Cmd;

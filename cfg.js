@@ -1,8 +1,8 @@
 const data = {
 }
-const dbg = require('./dbg');
 const MIN_VERBOSITY_VERBOSE = 2;
-const {lib} = require('./');
+const index = require('./');
+const {lib, dbg} = index;
 /**
  * Represents runtime-configuration. 
  * Is writable; will clean & validate values.
