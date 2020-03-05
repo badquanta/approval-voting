@@ -1,6 +1,6 @@
 
 // internal deps:
-const { lib, cli, dbg } = require('../');
+const { lib, cfg, cli, dbg } = require('../');
 const { Question, WorkDir } = lib;
 const { Cmd } = cli;
 /**
@@ -28,11 +28,11 @@ class show extends Cmd {
 
   async showIDs(options) {
     return new Promise((resolve, reject) => {
-      WorkDir.listQuestions()
-        .then((list) => Question.loadAll(...list))
+      cfg.workdir.listQuestions()
+        .then((list) => cfg.workdir.readQuestions(...list))
         .then((questions) => {
-          questions.map(function showQuestion(q, qi) {
-            return output = [
+          let s = questions.map(function showQuestion(q, qi) {
+            return [
               [`# QUESTION:`, `${qi + 1}`, `OF`, `${questions.length}.`],
               [],
               [`## TEXT:`],
@@ -46,10 +46,9 @@ class show extends Cmd {
                 [`### ${i} )`, '', `${c}`]
               )
             ].map((r) => r.join('\t')).join('\n');
-          });
-          var output = questions.join('\n---\n');
-          console.log(output);
-          return Promise.resolve(output);
+          }).join('\n---\n');
+          console.log(s);
+          return Promise.resolve(s);
         });
     });
   }

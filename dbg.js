@@ -1,12 +1,13 @@
 const index = require('./');
- const {Debug } = index.ext;
-let name = require('./lib/name');
+const {Debug} = index.ext;
+const {name} = index.pkg.name;
 /**
  * Using the `debug` module, this defines
  * the root of approval-voting logging.
  * @todo may move away from debug
  */
-const dbg = module.exports = Debug(name);
+
+const dbg = module.exports = Debug(index.pkg.name);
 dbg.warn = Debug(`${name}:WARNING`);
 dbg.warn.color = 1;
 dbg.error = Debug(`${name}:ERROR`,{color:'red'})

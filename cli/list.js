@@ -1,8 +1,8 @@
 /** @module approval-voting/cli */
-const cfg = require('../cfg');
-const dbg = require('../dbg');
-const index = require('./'); const {Fs} = index.ext;
-const { Question, WorkDir } = require('../lib');
+const index = require('../'); 
+const {Fs} = index.ext;
+const {cfg,dbg} = index;
+const { Question, WorkDir } = index.lib;
 /**
  * 
  */

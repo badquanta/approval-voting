@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-const AV = require('..');
-const aVote =module.exports = new AV.lib.cli.Cmd;
+const index = require('../');
+const aVote =module.exports = new index.cli.Cmd;
 /**  **/
 aVote.action(function(cmd){
   

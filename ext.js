@@ -24,6 +24,10 @@ module.exports = {
    */
   get Debug()   {return require('debug');},
   /**
+   * @link https://www.npmjs.com/package/object-hash
+   */
+  get ObjectHash() {return require('object-hash');},
+  /**
    * @link https://www.npmjs.com/package/mkdirp
    */
   get MkDirP()  {return require('mkdirp');},

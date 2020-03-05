@@ -4,9 +4,8 @@ const index = require('../');
 const {cfg, dbg, lib} = index;
 //const {WorkDir} = lib;
 // external deps
-const index = require('./'); const {Commander} = index.ext;
-const index = require('./');
- const {Debug } = index.ext;
+const {Commander} = index.ext;
+const {Debug} = index.ext;
 /**
  * Abstract base command for all the various commands.
  * @extends commander/Command

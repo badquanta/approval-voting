@@ -1,7 +1,7 @@
 /** @module approval-voting/cli */
-const cfg = require('../cfg');
-const dbg = require('../dbg');
-const index = require('./'); const {Fs} = index.ext;
+const index = require('../'); 
+const {cfg, dbg} = index;
+const {Fs} = index.ext;
 class config extends require('./Cmd') {
   constructor(...args){
     super(...args)    

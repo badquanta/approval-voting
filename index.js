@@ -1,25 +1,22 @@
 
 /**
- * @module approval-voting
- */
-/**
- * 
+ * index.js provides require-on-demand access to components
+ * of the library via exported properties.
+ * @module approval-voting 
  */
 module.exports = {
-  /**
-   * @returns {lib}
-   */
+  /** core library logic classes */
   get lib(){return require('./lib')}, 
-  /**
-   * @returns {cli}
-   */
+  /** command line interface classes */
   get cli(){return require('./cli')},
-  /** 
-   * @returns {bin}
-  */
-  get bin(){    
-    return require('./bin')
-  },
-  get cfg(){return require('./cfg') },
-  get dbg(){return require('./dbg')}
+  /** executables shell scripts */
+  get bin(){return require('./bin');},
+  /** config */
+  get cfg(){return require('./cfg');},
+  /** debug */
+  get dbg(){return require('./dbg');},
+  /** externals */
+  get ext(){return require('./ext');},
+  /** package(json) */
+  get pkg(){return require('./package.json');}
 };
