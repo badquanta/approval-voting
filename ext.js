@@ -34,5 +34,9 @@ module.exports = {
   /**
    * @link https://www.npmjs.com/package/rimraf
    */
-  get RimRaf()  {return require('rimraf');}
+  get RimRaf()  {return require('rimraf');},
+  /**
+   * @link https://www.npmjs.com/package/inquirer
+   */
+  get Inquirer() {return require('inquirer');}
 }

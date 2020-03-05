@@ -66,6 +66,7 @@
   "dependencies": {
     "commander": "^4.1.1",
     "debug": "^4.1.1",
+    "inquirer": "^7.0.6",
     "mkdirp": "^1.0.3",
     "object-hash": "^2.0.3",
     "rimraf": "^3.0.2"

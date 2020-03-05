@@ -22,6 +22,24 @@ class poll extends require('./Cmd'){
         dbg.info('Ready to Ask %d questions.',questions.length);
         const ballot = new index.lib.Ballot(...questions);
         dbg.info('Constructed ballot:',ballot.getHash());
+        // time to start reading input.. first off.. who's voting?
+        return index.ext.Inquirer.prompt(
+          [{type:'string',message:"What is your name?",name:"voter"}]
+        ).then(({voter})=>{
+          dbg.info("Got voter name:",voter);
+          // so now we need to collect each question...
+          return index.ext.Inquirer.prompt(
+            questions.map((question, idx)=>{
+              return {
+                name: `${idx}`,
+                type: 'checkbox',
+                message: question.text,
+                prefix: question.description,
+                choices: question.getChoices()
+              }
+            })
+          )
+        });
       });
   }
 }
