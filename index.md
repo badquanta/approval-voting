@@ -28,7 +28,7 @@
     -   [WorkDir][24]
 -   [Question][25]
     -   [Parameters][26]
-    -   [generateId][27]
+    -   [getHash][27]
         -   [Parameters][28]
     -   [getChoices][29]
     -   [isInvalid][30]
@@ -40,7 +40,7 @@
     -   [create][36]
         -   [Parameters][37]
 -   [Question][38]
-    -   [generateId][39]
+    -   [getHash][39]
         -   [Parameters][40]
     -   [getChoices][41]
     -   [isInvalid][42]
@@ -200,7 +200,7 @@ with a set of possible choices.
 -   `winners` **any**  (optional, default `1`)
 -   `choices` **([string][115] \| [object][116])** Expected to generally just be a string/text representing that choice. May also be an object; must have the property `text`.
 
-### generateId
+### getHash
 
 Generate a question ID.
 
@@ -254,7 +254,7 @@ saves the question to the basedir
 
 ## Question
 
-### generateId
+### getHash
 
 Generate a question ID.
 
@@ -668,7 +668,7 @@ compute "ObjectHashes".
 
 [26]: #parameters
 
-[27]: #generateid
+[27]: #getHash
 
 [28]: #parameters-1
 
@@ -692,7 +692,7 @@ compute "ObjectHashes".
 
 [38]: #question-5
 
-[39]: #generateid-1
+[39]: #getHash-1
 
 [40]: #parameters-6
 

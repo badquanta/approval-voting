@@ -11,12 +11,17 @@ class list extends require('./Cmd') {
     super(...args);
     this.arguments('');
     this.option('-f, --fields <field...>', 'pick one or more comma separated fields to list with the HASH ids.', function collectShownFields(nv, pv) {
-      return pv.concat(...nv.split([',', ' ', '"', '\'']).map((e) => new RegExp(e.trim())));
+      return pv.concat(...nv.split(',').map((e) => new RegExp(e.trim())));
     }, []);
     this.action(async function (cmd) {
-      
+      dbg.info('getting workdir list...');
       // find everything
       return cfg.workdir.list().then((listing) => {
+        dbg.info('got it...',listing.length);
+        dbg.info('fields',cmd.fields);
+        if(cmd.fields.length < 1){
+          return listing;
+        }
         return listing.map((e) => cfg.workdir.path + '/' + e).reduce(function (m, e) {
           var data = Question.load(e);
           m[e] = {};

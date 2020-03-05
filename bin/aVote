@@ -2,14 +2,10 @@
 const index = require('../');
 const aVote =module.exports = new index.cli.Cmd;
 /**  **/
-aVote.action(function(cmd){
-  
-  aVote.outputHelp();
-})
-aVote.command('question','create a question.');
-aVote.command('show');
-aVote.command('poll');
-aVote.command('list', 'list defined questions');
+aVote.command('question','define the question text and a list of choices.');
+aVote.command('show','to preview questions as they might be presented.');
+aVote.command('poll','to ask the voters for their choices.');
+aVote.command('list', 'to see what has been defined.');
 aVote.nextTickIfMain(module);
 /** finish **/
 // effectively, process.exit(EXIT_OK), but wait on promises too.

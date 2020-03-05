@@ -83,11 +83,12 @@ Here's what I've got working:
  - [X] aVote-question
  - [X] aVote-list
  - [x] aVote-config
- - [ ] aVote-show (in progress)
+ - [x] aVote-show 
+ - [ ] aVote-poll (in progress)
 
 Here's what I need to finish (at least) for the prototype:
 
- - [ ] aVote-poll
+ 
  - [ ] aVote-tally
 
 Verification should be done at each step of the process.
