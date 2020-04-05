@@ -54,5 +54,5 @@ class show extends Cmd {
   }
 
 }
-/** @module approval-voting/cli */
+
 module.exports = show;

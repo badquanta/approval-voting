@@ -21,15 +21,15 @@
     Is there a world you long to see?                                   Is there a hope you hold onto?
     Do you hear the people sing                                         Do you hear the people sing
     Say, do you hear the distant drums?                                 Say, do you hear the poll results?
-    It is the future that they bring                                    Its been the longest since they mirror
+    It is the future that they bring                                    Its been the longest since they mirrored
     When tomorrow comes!                                                What leaders say!
     Will you join in our crusade?                                       Will you join in with Bernie?
     Who will be strong and stand with me?                               And these Justice Democrats?
     Somewhere beyond the barricade                                      Somewhere beyond the primaries
     Is there a world you long to see?                                   Is there a hope you hold on to?
-    Do you hear the people sing                                         Say, do you hear the poll results?
-    It is the future that they bring                                    Its been the longest since they mirror
-    When tomorrow comes!                                                What leaders say!
+    Do you hear the people sing                                         Say, did you hear the poll results?
+    It is the future that they bring                                    It is the future of our people
+    When tomorrow comes!                                                What elictions bring!
 
     Do you hear the people sing?                                        Do you hear the people sing?
     Singing the songs of angry men?                                     Singing of treason they have seen?

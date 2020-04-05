@@ -1,4 +1,4 @@
-/** @module approval-voting/cli */
+/** 
 const index = require('../'); 
 const {Fs} = index.ext;
 const {cfg,dbg} = index;

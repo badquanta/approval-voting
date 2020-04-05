@@ -1,7 +1,6 @@
-
 /**
  * Approval voting commands:
- * @module approval-voting/bin
+ * 
  */
 module.exports = {
   get cmd(){return require('./bin/aVote')},

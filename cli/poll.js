@@ -1,6 +1,6 @@
 const index = require('../');
 const {dbg} = index;
-/** @module approval-voting/cli */
+/** 
 /**
  * approval-voting/cli/
  */

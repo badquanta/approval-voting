@@ -2,12 +2,16 @@
 /**
  * index.js provides require-on-demand access to components
  * of the library via exported properties.
- * @module approval-voting 
+ * 
  */
 module.exports = {
-  /** core library logic classes */
+  /** core library logic classes 
+   
+  */
   get lib(){return require('./lib')}, 
-  /** command line interface classes */
+  /**
+   *  command line interface classes 
+   **/
   get cli(){return require('./cli')},
   /** executables shell scripts */
   get bin(){return require('./bin');},

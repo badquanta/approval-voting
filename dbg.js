@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 const index = require('./');
 const {Debug} = index.ext;
 const {name} = index.pkg.name;

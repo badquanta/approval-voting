@@ -1,4 +1,3 @@
-/** @module approval-voting/cli/Cmd */
 // internal deps
 const index = require('../');
 const {cfg, dbg, lib} = index;
@@ -8,9 +7,6 @@ const {Commander} = index.ext;
 const {Debug} = index.ext;
 /**
  * Abstract base command for all the various commands.
- * @extends commander/Command
- * @exports Cmd
- * 
  */
 class Cmd extends Commander.Command {
   /**
@@ -53,9 +49,9 @@ class Cmd extends Commander.Command {
    */
   constructor(...args) {
     super(...args);
-    /** Where to store data. */
+    /** @name --basedir Where to store data. */
     this.option('-b, --basedir <path>', 'Specify the directory all files are created within.', (path) => cfg.workdir = path, 'approvals')
-    /** How much to report to the user. */
+    /** @name --verbosity How much to report to the user. */
     this.option('-v, --verbosity [verbosity]', 'Specify `debug` pattern of output',
       // When specified on the command line, this function will be triggered.
       (val) => {
@@ -71,7 +67,7 @@ class Cmd extends Commander.Command {
       // When the user has not specified a level, the above function should recieve null as a default.
       null
     )
-    /** Enable all reporting to user. */
+    /** @name --verbose Enable all reporting to user. */
     this.option('--verbose',
       `when specified, basicaly $DEBUG=* will take effect.`,
       /** This function will force npm's `debug` to output anything that uses it; including approval-voting */
@@ -79,8 +75,8 @@ class Cmd extends Commander.Command {
         dbg('--verbose');
         Debug.enable("*");
       }
-    )//--verbose
-    /** Disable any extra output; only errors OR results. */
+    )
+    /** @name --verbose Disable any extra output; only errors OR results. */
     this.option('-q, --quiet',
       `shen specified, basical $DEBUG='' will take effect.`,
       /** This function will force npm's `debug` to disable output of anything that uses it. */
@@ -89,6 +85,8 @@ class Cmd extends Commander.Command {
         Debug.enable("");
       }
     )//-q/--quiet    
+    /** @name --interface Specify which user interface to use: */
+    this.option('-i, --interface <ntrfc>','Specify the interface desired. Examples: serial, text, web', 'serial');
   }
 }
 /** @exports @class Cmdm */

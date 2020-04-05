@@ -1,7 +1,7 @@
 /** 
  * this module is a require-on-demand index of the
  * c.l.i. library of classes.
- * @module approval-voting/cli 
+ * 
  * */
 module.exports = {
   get Cmd() { return require('./cli/Cmd') },

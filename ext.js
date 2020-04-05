@@ -1,4 +1,7 @@
 // todo: idea count calls for each in state-signing-hashes.
+/**
+ * 
+ */
 module.exports = {
   // the following are native node libraries:
   // TODO: on node.js dependency bump; review these links.
